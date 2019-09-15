@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ ! -d ${PGDATA} ]; then
+ echo -e "\e[01;31mDirectory '${PGDATA}' does not exists!\e[0m" | tee /dev/stderr
+ return 1
+fi
+
+pgpid=$(awk 'NR==1{print $1}' ${PGDATA}/postmaster.pid)
+pgchk=$(kill -0 ${pgpid}; echo $?)
+if [ ${pgchk} == 0 ]
+then
+        pgstatus='\033[0;32m running \033[0m PID=> '${pgpid}
+else
+        pgstatus='\033[5;31m stopped \033[0m'
+fi
+echo "------------------PostgreSQL InfoTable--------------------"
+echo "# PGHOME => ${PGHOME}"
+echo "# PGDATA => ${PGDATA}"
+echo "# PGHOST => ${PGHOST}"
+echo -e "# STATUS => ${pgstatus}"
+echo "----------------------------------------------------------"

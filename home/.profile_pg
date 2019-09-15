@@ -1,0 +1,13 @@
+export PGVERSION=9.6
+export PGHOME=/products/postgres/PG$PGVERSION
+export PGDATA=/db/data/$USER/PG$PGVERSION
+export PGHOST=/db/logs/$USER/PG$PGVERSION
+PGUSER=postgres
+
+export PATH=$PATH:$PGHOME/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PGHOME/lib
+
+#if [ "$SSH_TTY" ]
+#then
+   . ~/.pg_current_info
+#fi
