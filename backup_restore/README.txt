@@ -15,3 +15,10 @@ pg_dump -d db1 --data-only -f company.data.sql
 pg_dump -d db1 --insert --data-only -f company.backup_data.sql
 --Dump only Data with Inserts and disables Triggers
 pg_dump -d db1 --insert --disable-triggers --data-only -f company.backup_data.sql
+
+
+
+insert into team (name) values ('aaa');
+pg_dump -d db1 -Ft -f db1.tar
+pg_restore -d db3 -t team db1.tar
+pg_restore -d db3 --data-only -t team db1.tar
